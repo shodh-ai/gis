@@ -22,7 +22,10 @@
 
 		try {
 			const response = await fetch(
-				`http://216.153.60.123:5000/shodhgis/${encodeURIComponent(query)}`
+				`http://216.153.60.123:5000/shodhgis/${encodeURIComponent(query)}`,
+				{
+					mode: 'cors'
+				}
 			);
 
 			const { coordinates } = await response.json();

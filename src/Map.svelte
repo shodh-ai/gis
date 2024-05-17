@@ -22,7 +22,7 @@
 
 		try {
 			const response = await fetch(
-				`https://flask-hello-world-two-wine.vercel.app/about/?prompt=${encodeURIComponent(query)}`,
+				`https://shodh-api.vercel.app/shodhgis/?prompt=${encodeURIComponent(query)}`,
 				{
 					mode: 'cors'
 				}

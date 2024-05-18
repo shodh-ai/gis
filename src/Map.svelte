@@ -2,7 +2,7 @@
 	// @ts-expect-error "google" is not defined because it's being loaded in a script tag in App.svelte
 	let map: google.maps.Map;
 	let query: string;
-	let buttonDisabled: boolean = false;
+	let buttonDisabled = false;
 	let container: HTMLDivElement;
 
 	const zoom = 5;
@@ -11,6 +11,8 @@
 
 	import { onMount } from 'svelte';
 	import LoadingIcon from './assets/loading.svg';
+	import DrdoLogo from './assets/drdo.png';
+	import ShodhLogo from './assets/shodh.png';
 
 	const submitQuery = async () => {
 		buttonDisabled = true;
@@ -38,7 +40,7 @@
 			// @ts-expect-error
 			const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
 
-			for (let coord in coordinates) {
+			for (const coord in coordinates) {
 				new AdvancedMarkerElement({
 					map: map,
 					position: {
@@ -58,9 +60,14 @@
 
 	onMount(async () => {
 		// @ts-expect-error
-		map = new google.maps.Map(container, { zoom, center, mapId });
+		map = new google.maps.Map(container, { zoom, center, mapId, mapTypeControl: false });
 	});
 </script>
+
+<div class="logo-container">
+	<img src="{DrdoLogo}" alt="DRDO Logo" height="50px" width="50px" />
+	<img src="{ShodhLogo}" alt="Shodh.aiLogo" height="50px" />
+</div>
 
 <div class="form-container">
 	<p class="title">Enter Search Query</p>
@@ -88,6 +95,19 @@
 	.full-screen {
 		width: 100vw;
 		height: 100vh;
+	}
+
+	.logo-container {
+		z-index: 10;
+		position: absolute;
+		display: flex;
+		top: 16px;
+		left: 16px;
+		gap: 1.5rem;
+		padding: 8px 16px;
+		border-radius: 16px;
+		border: 1px #eeeeee solid;
+		background-color: white;
 	}
 
 	.form-container {
